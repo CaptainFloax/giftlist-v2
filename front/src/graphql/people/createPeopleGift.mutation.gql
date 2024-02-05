@@ -1,0 +1,7 @@
+query UpdateProduct($input: UpdateProductInput!) {
+    people {
+        id
+        name
+        email
+    }
+}

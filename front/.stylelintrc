@@ -1,0 +1,35 @@
+{
+    "root": true,
+    "extends": ["stylelint-config-standard-scss"],
+    "overrides": [
+        {
+            "files": ["**/*.vue"],
+            "customSyntax": "postcss-html"
+        }
+    ],
+    "rules": {
+        "scss/at-mixin-pattern": "^[a-z][a-zA-Z0-9]+$",
+        "at-rule-no-unknown": [
+            null,
+            {
+                "ignoreAtRules": [
+                    "windi",
+                    "apply",
+                    "include",
+                    "variants",
+                    "responsive",
+                    "screen",
+                    "if",
+                    "mixin",
+                    "else",
+                    "use",
+                    "forward",
+                    "return",
+                    "function"
+                ]
+            }
+        ],
+        "no-descending-specificity": null,
+        "selector-class-pattern": "^((sm|md|lg|xl|2xl):)?[a-z][-_/a-z0-9]*$"
+    }
+}

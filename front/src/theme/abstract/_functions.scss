@@ -1,0 +1,30 @@
+@use "sass:map";
+@use "../colors" as *;
+
+@function color($color: "brand", $tone: 500, $mode: "light") {
+    $hsl: map.get($palette, $color);
+
+    // on récupère les couleurs de la palette
+    // mode light
+    @if $mode =="light" {
+        @if $tone ==500 {
+            @return hsl(hue($hsl), saturation($hsl), lightness($hsl));
+        }
+
+        @else {
+            @return hsl(hue($hsl), saturation($hsl), calc($tone / 10) * 1%);
+        }
+
+        // mode dark
+    }
+
+    @else {
+        @if $tone ==500 {
+            @return hsl(hue($hsl), saturation($hsl), lightness($hsl));
+        }
+
+        @else {
+            @return hsl(hue($hsl), saturation($hsl), calc((1000 - $tone) / 10) * 1%);
+        }
+    }
+}

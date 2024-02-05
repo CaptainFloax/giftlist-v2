@@ -1,0 +1,17 @@
+// ----------------- //
+//   SPECIFIC FONTS  //
+// ----------------- //
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@font-face {
+    font-family: flaviotte;
+    src: url('../assets/ressources/fonts/flaviotte/Flaviotte.woff') format('woff'),
+        /* Modern Browsers */ url('../assets/ressources/fonts/flaviotte/Flaviotte.woff2')
+            format('woff2'),
+        /* Modern Browsers */ url('../assets/ressources/fonts/flaviotte/Flaviotte.ttf')
+            format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizelegibility;
+}

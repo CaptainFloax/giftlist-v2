@@ -1,0 +1,50 @@
+workflow:
+    rules:
+        # Dev Interne
+        - if: $CI_COMMIT_BRANCH == "main"
+          variables:
+              ENVIRONMENT: prod
+              FO_SOURCE: ./
+              FO_TARGET: ./giftlist-api.capitaine.dev/
+              SSH_KEY: $SSH_KEY
+              SSH_USERNAME: $SSH_USERNAME
+              SSH_HOST: $SSH_HOST
+              SSH_PORT: $SSH_PORT
+
+.add_ssh_key:
+    before_script:
+        - apk update
+        - apk add rsync
+        - 'which ssh-agent || ( apk add --no-cache openssh-client )'
+        - eval $(ssh-agent -s)
+        - echo "$SSH_KEY" | ssh-add -
+        - mkdir -p ~/.ssh
+        - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+.api_setup:
+    before_script:
+        - cd api
+
+stages:
+    - deploy
+    - remote_install_dependencies
+
+# Select Docker image to run pipeline
+image: node:18-alpine3.17
+
+deploy:
+    stage: deploy
+    extends: .add_ssh_key
+    environment:
+        name: $ENVIRONMENT
+    script:
+        - cd api
+        - rsync -a $FO_SOURCE -e "ssh -p $SSH_PORT" $SSH_USERNAME@$SSH_HOST:$FO_TARGET
+
+remote_install_dependencies:
+    stage: remote_install_dependencies
+    extends: .add_ssh_key
+    only:
+        - main
+    script:
+        - ssh -p $SSH_PORT $SSH_USERNAME@$SSH_HOST "cd $FO_TARGET && /opt/plesk/php/8.2/bin/php /usr/lib/plesk-9.0/composer.phar install"

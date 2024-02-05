@@ -1,0 +1,72 @@
+version: '3.9'
+services:
+    gl-api:
+        build:
+            args:
+                user: admin
+                uid: 1000
+            context: ./api
+            dockerfile: Dockerfile
+        image: gl-api
+        container_name: gl-api
+        env_file:
+            - .env
+        restart: on-failure
+        working_dir: /var/www/
+        volumes:
+            - ./api:/var/www
+
+    # gl-front:
+    #     image: node:18-alpine3.17
+    #     container_name: gl-front
+    #     env_file:
+    #         - .env
+    #     restart: on-failure
+    #     ports:
+    #         - 5173:5173
+    #     working_dir: /var/www/
+    #     volumes:
+    #         - ./front/:/var/www/:delegated
+    #         - ./front/node_modules:/var/www/node_modules:delegated
+    #     tty: true
+
+    gl-db:
+        image: mysql:8.0
+        container_name: gl-db
+        env_file:
+            - .env
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - ./mysql/db:/var/lib/mysql
+            - ./mysql/seed:/docker-entrypoint-initdb.d
+
+    gl-nginx:
+        image: nginx:alpine
+        container_name: gl-nginx
+        restart: unless-stopped
+        ports:
+            - 8000:80
+            - 9000:9000
+        volumes:
+            - ./api:/var/www:delegated
+            - ./nginx:/etc/nginx/conf.d/
+
+    gl-phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: gl-phpmyadmin
+        links:
+            - gl-db
+        environment:
+            PMA_HOST: gl-db
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        restart: always
+        ports:
+            - 8002:80

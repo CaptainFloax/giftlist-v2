@@ -1,0 +1,52 @@
+@use 'abstract/abstract' as *;
+
+// --------------- //
+//   SPECIFIC VAR  //
+// --------------- //
+// Width
+$container-max-width: 1440px;
+
+// Breakpoints
+$xs: 400px;
+$ms: 576px;
+$s: 760px;
+$m: 980px;
+$l: 1200px;
+$xl: 1440px;
+
+// Spaces
+
+// --- TYPOGRAPHIES -- //
+
+$font-base: 'Open Sans', sans-serif;
+$font-title: flaviotte, serif;
+$font-menu: flaviotte, serif;
+
+// ------ TITLES -----//
+
+$h1: 40px;
+$h2: 34px;
+$h3: 24px;
+$paragraph: 16px;
+
+// ---- SIZES ---- //
+
+// Width
+$container-max-width: 1440px;
+
+// ------ SAPCING -----//
+$space-xs: 5px;
+$space-s: 10px;
+$space-m: 16px;
+$space-l: 18px;
+$space-xl: 32px;
+$space-xxl: 48px;
+$space-xxxl: 72px;
+
+// ------ SIDEBAR ---- //
+$sidebar_width: 300px;
+$sidebar_item_font-size: 18px;
+$sidebar_subitem_font-size: 16px;
+
+// --- COLORS --- //
+$app-background-color: color(brand, 980);

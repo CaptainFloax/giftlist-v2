@@ -1,0 +1,33 @@
+{
+    "root": true,
+    "env": {
+        "node": true,
+        "vue/setup-compiler-macros": true,
+        "browser": true,
+        "es2021": true
+    },
+
+    "extends": ["plugin:vue/vue3-essential", "eslint:recommended", "@vue/typescript/recommended"],
+
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+
+    "rules": {
+        "no-irregular-whitespace": "error",
+        "no-console": "warn",
+        "no-unused-vars": "error"
+    },
+
+    "overrides": [
+        {
+            "files": [
+                "**/__tests__/*.{j,t}s?(x)",
+                "**/tests/unit/**/*.spec.{j,t}s?(x)"
+            ],
+            "env": {
+                "jest": true
+            }
+        }
+    ]
+}

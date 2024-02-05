@@ -1,0 +1,11 @@
+query AllProductsQuery {
+    products {
+        id
+        link
+        name
+        desc
+        img
+        price
+        state
+    }
+}

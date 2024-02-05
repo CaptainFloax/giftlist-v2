@@ -1,0 +1,6 @@
+query UpdateProduct($input: UpdateProductInput!) {
+    updateProducts(input: $input) {
+        id
+        state
+    }
+}

@@ -1,0 +1,23 @@
+$tones: (
+    0: 98,
+    50: 95,
+    100: 90,
+    200: 80,
+    300: 70,
+    400: 60,
+    600: 40,
+    700: 30,
+    800: 20,
+    900: 10,
+    950: 5
+);
+$palette: (
+    brand: hsl(227deg 42% 50%),
+    assist: hsl(26deg 96% 70%),
+    accent: hsl(10deg 100% 66%),
+    neutral: hsl(238deg 26% 20%),
+    success: hsl(129deg 64% 39%),
+    warning: hsl(39deg 71% 51%),
+    danger: hsl(3deg 67% 50%)
+);
+$colors-name: 'brand', 'assist', 'accent', 'neutral';
